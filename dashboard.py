@@ -44,7 +44,7 @@ elif menu == "Analisis Data":
     st.write("### PERTANYAAN 1")
     st.write("###  Produk apa saja yang memiliki volume pembelian tertinggi?")
 
-    ordered_products_by_customers_df = pd.read_csv("pyth\ordered_products_by_customers.csv")
+    ordered_products_by_customers_df = pd.read_csv("ordered_products_by_customers.csv")
     # datetime_columns = ["order_purchase_timestamp", "order_approved_at", "order_delivered_carrier_date", "order_delivered_customer_date", "order_estimated_delivery_date"]
     ordered_products_by_customers_df.reset_index(inplace=True)
 
