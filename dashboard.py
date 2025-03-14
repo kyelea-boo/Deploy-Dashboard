@@ -78,7 +78,7 @@ elif menu == "Analisis Data":
     # PERTANYAAN 2
     st.write("### PERTANYAAN 2")
     st.write("###  Apa kategori produk yang memiliki rating tertinggi dan rating terendah?  ")
-    category_reviews_df = pd.read_csv("pyth\category_reviews.csv")
+    category_reviews_df = pd.read_csv("category_reviews.csv")
 
     category_reviews_sorted = category_reviews_df.sort_values(by="review_score", ascending=False)
     top_10_products_by_review = category_reviews_sorted.head(10)
