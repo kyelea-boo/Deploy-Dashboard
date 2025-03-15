@@ -27,8 +27,10 @@ if menu == "Halaman Utama":
     selected_dataset = st.selectbox("Pilih Dataset:", list(dataset_options.keys()))
     file_path = dataset_options[selected_dataset]
 
-    df = pd.read_csv(file_path)
-
+    try:
+        df = pd.read_csv(file_path)
+    except FileNotFoundError:
+        st.error("File tidak ditemukan!")
 
     st.write(f"### Dataframe yang Dipilih: {selected_dataset}")
     st.dataframe(df)
@@ -46,6 +48,15 @@ elif menu == "Analisis Data":
     ordered_products_by_customers_df = pd.read_csv("ordered_products_by_customers.csv")
     # datetime_columns = ["order_purchase_timestamp", "order_approved_at", "order_delivered_carrier_date", "order_delivered_customer_date", "order_estimated_delivery_date"]
     ordered_products_by_customers_df.reset_index(inplace=True)
+
+    min_date = ordered_products_by_customers_df["order_delivered_customer_date"].min()
+    max_date = ordered_products_by_customers_df["order_delivered_customer_date"].max()
+    start_date, end_date = st.date_input(
+        label='Rentang Waktu',min_value=min_date,
+        max_value=max_date,
+        value=[min_date, max_date]
+    )
+
 
     # for column in datetime_columns:
     #     ordered_products_by_customers_df[column] = pd.to_datetime(ordered_products_by_customers_df[column])
