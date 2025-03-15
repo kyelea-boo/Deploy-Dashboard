@@ -7,6 +7,11 @@ import streamlit as st
 sns.set(style='dark')
 st.set_page_config(page_title="Analisis E-Commerce Public Dataset", layout="wide")
 
+ordered_products_df = pd.read_csv("ordered_products_by_customers.csv")
+
+min_date = ordered_products_df["order_delivered_customer_date"].min()
+max_date = ordered_products_df["order_delivered_customer_date"].max()
+
 st.sidebar.markdown("## Navigasi")
 if st.sidebar.button("Halaman Utama"):
     menu = "Halaman Utama"
@@ -33,11 +38,16 @@ if menu == "Halaman Utama":
     st.write(f"### Dataframe yang Dipilih: {selected_dataset}")
     st.dataframe(df)
 
-
 elif menu == "Analisis Data":
     st.markdown("""
         <h1 style='text-align: center;'>📊 Analisis Data</h1>
     """, unsafe_allow_html=True)
+
+    start_date, end_date = st.date_input(
+        label='Rentang Waktu',min_value=min_date,
+        max_value=max_date,
+        value=[min_date, max_date]
+    )
 
     # PERTANYAAN 1
     st.write("")
